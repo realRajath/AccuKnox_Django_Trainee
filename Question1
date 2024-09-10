@@ -1,0 +1,23 @@
+"""Question 1: By default are django signals executed synchronously or asynchronously? Please support your answer with a code snippet that conclusively proves your stance. The code does not need to be elegant and production ready, we just need to understand your logic.
+   Answer: Yes, Django signals synchronously executed by default
+   Below is the supporting code snippet"""
+
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+import time
+
+class MyClass(models.Model):
+    name = models.CharField(max_length=100)
+
+@receiver(post_save, sender=MyClass)
+def my_handler(sender, instance, **kwargs):
+    print("Signal started...")
+    time.sleep(10)  # Adding delay to show it's synchronous
+    print("Signal finished.")
+
+# Creating an object to trigger the signal
+obj = MyClass(name='Example')
+obj.save()
+
+print("Saved!")
