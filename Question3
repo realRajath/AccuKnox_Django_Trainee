@@ -7,7 +7,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 
 @receiver(post_save, sender=User)
-def my_callback(sender, instance, **kwargs):
+def callback(sender, instance, **kwargs):
     instance.username = 'updateduser'
     instance.save()
 
