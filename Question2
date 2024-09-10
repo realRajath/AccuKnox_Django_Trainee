@@ -8,7 +8,7 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 
 @receiver(post_save, sender=User)
-def my_callback(sender, instance, **kwargs):
+def callback(sender, instance, **kwargs):
     print(f"Signal received in thread: {threading.current_thread().name}")
 
 def create_user():
